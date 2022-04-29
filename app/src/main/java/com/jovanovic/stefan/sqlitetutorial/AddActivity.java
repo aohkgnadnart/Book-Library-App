@@ -25,9 +25,19 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
-                myDB.addBook(title_input.getText().toString().trim(),
-                        author_input.getText().toString().trim(),
-                        Integer.valueOf(pages_input.getText().toString().trim()));
+                String title = title_input.getText().toString().trim();
+                String author = author_input.getText().toString().trim();
+                String pages = pages_input.getText().toString().trim();
+                if(title.isEmpty()) {
+                    title_input.setError("Please enter a title");
+                }
+                else if(author.isEmpty()) {
+                    author_input.setError("Please enter a author");
+                }
+                else if(pages.isEmpty()){
+                    pages_input.setError("Please enter number of pages");
+                }
+                else myDB.addBook(pages, author, Integer.valueOf(pages));
             }
         });
     }
